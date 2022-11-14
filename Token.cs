@@ -12,24 +12,20 @@ namespace Generador
         private Tipos Clasificacion;
         public enum Tipos
         {
-            Identificador
+            Identificador, Produce, 
         }
-
         public void setContenido(string contenido)
         {
             this.Contenido = contenido;
         }
-
         public void setClasificacion(Tipos clasificacion)
         {
             this.Clasificacion = clasificacion;
         }
-
         public string getContenido()
         {
             return this.Contenido;
         }
-
         public Tipos getClasificacion()
         {
             return this.Clasificacion;
