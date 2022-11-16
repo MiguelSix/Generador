@@ -16,6 +16,13 @@ namespace Generador
         protected int i = 0;
         int[,] TRAND = new int[,]
         {
+        //  WS, -, >, L, EOL, Lambda
+            {0, 1, 5, 3, 4, 5},
+            {F, F, 2, F, F, F},
+            {F, F, F, F, F, F},
+            {F, F, F, 3, F, F},
+            {F, F, F, F, F, F},
+            {F, F, F, F, F, F}
         };
         public Lexico()
         {
@@ -61,11 +68,38 @@ namespace Generador
         }
         private void clasifica(int estado)
         {
-
+            switch(estado)
+            {
+                case 1:
+                    setClasificacion(Tipos.ST);
+                    break;
+                case 2:
+                    setClasificacion(Tipos.Produce);
+                    break;
+                case 3:
+                    setClasificacion(Tipos.SNT);
+                    break;
+                case 4:
+                    setClasificacion(Tipos.FinProduccion);
+                    break;
+                case 5:
+                    setClasificacion(Tipos.ST);
+                    break;
+            }
         }
         private int columna(char c)
         {
-            return 0;
+            if(c == 10)
+                return 4;
+            else if(char.IsWhiteSpace(c))
+                return 0;
+            else if(c == '-')
+                return 1;
+            else if(c == '>')
+                return 2;
+            else if (char.IsLetter(c))
+                return 3;
+            return 5;
         }
         public void NextToken()
         {
@@ -99,6 +133,10 @@ namespace Generador
             if (estado == E)
             {
                 throw new Error("\nError lexico: No definido en linea: " + linea, log);
+            }
+            if(!FinArchivo())
+            {
+                log.WriteLine(getContenido() + " "  + getClasificacion());
             }
         }
         public bool FinArchivo()

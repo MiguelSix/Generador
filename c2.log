@@ -1,0 +1,16 @@
+Archivo: C:\Users\wachi\OneDrive\Escritorio\AUTOMATAS\Generador\c2.gram
+Fecha: 16/11/2022 9:53:05
+Gramatica SNT
+: ST
+c SNT
+
+ FinProduccion
+Program SNT
+-> Produce
+
+ FinProduccion
+Librerias SNT
+-> Produce
+
+ FinProduccion
+Fin de compilacion

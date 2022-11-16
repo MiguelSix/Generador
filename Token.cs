@@ -12,7 +12,7 @@ namespace Generador
         private Tipos Clasificacion;
         public enum Tipos
         {
-            Identificador, Produce, 
+            Identificador, Produce, SNT, ST, FinProduccion
         }
         public void setContenido(string contenido)
         {
