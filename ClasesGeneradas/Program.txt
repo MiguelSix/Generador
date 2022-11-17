@@ -1,6 +1,5 @@
-﻿/*Olvera Morales Miguel Angel*/
 using System;
-namespace Generador
+namespace cplusplus
 {
     public class Program
     {
@@ -8,9 +7,9 @@ namespace Generador
         {
             try
             {
-                using (Lenguaje lenguaje = new Lenguaje("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\c2.gram"))
+                using (Lenguaje a = new Lenguaje())
                 {
-                    lenguaje.gramatica();
+                    a.programa();
                 }
             }
             catch (Exception e)

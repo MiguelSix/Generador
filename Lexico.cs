@@ -10,6 +10,8 @@ namespace Generador
     {
         protected StreamReader archivo;
         protected StreamWriter log;
+        protected StreamWriter lenguaje;
+        protected StreamWriter programa;
         const int F = -1;
         const int E = -2;
         protected int linea;
@@ -31,6 +33,10 @@ namespace Generador
             bool existencia = File.Exists(path);
             log = new StreamWriter("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\c.log");
             log.AutoFlush = true;
+            lenguaje = new StreamWriter("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\ClasesGeneradas\\Lenguaje.txt");
+            lenguaje.AutoFlush = true;
+            programa = new StreamWriter("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\ClasesGeneradas\\Program.txt");
+            programa.AutoFlush = true;
             log.WriteLine("Archivo: c.gram");
             log.WriteLine("Fecha: " + DateTime.Now.ToString());
             if (existencia == true)
@@ -48,6 +54,10 @@ namespace Generador
             string pathLog = Path.ChangeExtension(nombre, ".log");
             log = new StreamWriter(pathLog);
             log.AutoFlush = true;
+            lenguaje = new StreamWriter("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\ClasesGeneradas\\Lenguaje.txt");
+            lenguaje.AutoFlush = true;
+            programa = new StreamWriter("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\ClasesGeneradas\\Program.txt");
+            programa.AutoFlush = true;
             log.WriteLine("Archivo: " + nombre);
             log.WriteLine("Fecha: " + DateTime.Now.ToString());
             if (File.Exists(nombre))
@@ -65,6 +75,8 @@ namespace Generador
             log.WriteLine("Fin de compilacion");
             Console.WriteLine("\nFin de compilacion");
             log.Close();
+            lenguaje.Close();
+            programa.Close();
         }
         private void clasifica(int estado)
         {
