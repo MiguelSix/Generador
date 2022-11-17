@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 //Requerimiento 1: Construir un metodo para escribir en el archivo Lenguaje.cs intentando el codigo
 //                 "{" incrementa un tabulador, "}" decrementa un tabulador
 //Requerimiento 2: Declarar un atributo "primeraProduccion" de tipo string y actualizarlo con la primera produccion de la gramatica
+//Requerimiento 3: La primera produccion es publica y el resto privadas
 
 namespace Generador
 {
