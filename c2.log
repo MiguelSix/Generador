@@ -1,5 +1,5 @@
 Archivo: C:\Users\wachi\OneDrive\Escritorio\AUTOMATAS\Generador\c2.gram
-Fecha: 17/11/2022 9:58:11
+Fecha: 18/11/2022 9:56:43
 Gramatica SNT
 : ST
 cplusplus SNT
@@ -7,18 +7,33 @@ cplusplus SNT
  FinProduccion
 Programa SNT
 -> Produce
+# ST
+Identificador SNT
+, ST
+Numero SNT
+Librerias SNT
 
  FinProduccion
 Librerias SNT
 -> Produce
+# ST
+include SNT
+< ST
+Identificador SNT
+. ST
+h SNT
+> ST
 
  FinProduccion
 Variables SNT
 -> Produce
+( ST
+) ST
 
  FinProduccion
 ListaIdentificadores SNT
 -> Produce
+Caracter SNT
 
  FinProduccion
 Fin de compilacion

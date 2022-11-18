@@ -33,9 +33,9 @@ namespace Generador
             bool existencia = File.Exists(path);
             log = new StreamWriter("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\c.log");
             log.AutoFlush = true;
-            lenguaje = new StreamWriter("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\ClasesGeneradas\\Lenguaje.txt");
+            lenguaje = new StreamWriter("C:\\Generico\\Lenguaje.cs");
             lenguaje.AutoFlush = true;
-            programa = new StreamWriter("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\ClasesGeneradas\\Program.txt");
+            programa = new StreamWriter("C:\\Generico\\Program.cs");
             programa.AutoFlush = true;
             log.WriteLine("Archivo: c.gram");
             log.WriteLine("Fecha: " + DateTime.Now.ToString());
@@ -54,9 +54,9 @@ namespace Generador
             string pathLog = Path.ChangeExtension(nombre, ".log");
             log = new StreamWriter(pathLog);
             log.AutoFlush = true;
-            lenguaje = new StreamWriter("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\ClasesGeneradas\\Lenguaje.txt");
+            lenguaje = new StreamWriter("C:\\Generico\\Lenguaje.cs");
             lenguaje.AutoFlush = true;
-            programa = new StreamWriter("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\ClasesGeneradas\\Program.txt");
+            programa = new StreamWriter("C:\\Generico\\Program.cs");
             programa.AutoFlush = true;
             log.WriteLine("Archivo: " + nombre);
             log.WriteLine("Fecha: " + DateTime.Now.ToString());
