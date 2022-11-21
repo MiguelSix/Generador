@@ -11,6 +11,7 @@ namespace Generador
                 using (Lenguaje lenguaje = new Lenguaje("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\c2.gram"))
                 {
                     lenguaje.gramatica();
+                    Console.WriteLine(lenguaje.primeraProduccion);
                 }
             }
             catch (Exception e)
