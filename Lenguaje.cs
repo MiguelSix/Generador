@@ -11,30 +11,54 @@ using System.Threading.Tasks;
 //Requerimiento 4 OK: El constructor lexico parametrizado debe validar que la extension del archivo a compilar sea .gen, y si no 
 //                 es asi debe lanzar una excepcion
 //Requerimiento 5: Resolver la ambiguedad de ST y SNT
-
+//                 recorrer linea por linea el archivo .gram para extraer del nombre de cada produccion
+//Requerimiento 6: Agregar el parentesis izquierdo y parentesis derecho escapados en la matriz de transiciones
+//Requerimiento 7: Implementar el OR y la cerradura epsilon (||, &&)
 namespace Generador
 {
     public class Lenguaje : Sintaxis, IDisposable
     {
         public string primeraProduccion;
         int numTabs;
+        List<string> listaSNT;
         public Lenguaje(string nombre) : base(nombre)
         {
             primeraProduccion = "";
             numTabs = 0;
+            listaSNT = new List<string>();
         }
         public Lenguaje()
         {
             primeraProduccion = "";
             numTabs = 0;
+            listaSNT = new List<string>();
         }
         public void Dispose()
         {
             Console.WriteLine("\n\nDestructor ejecutado exitosamente");
             cerrar();
         }
+        private bool esSNT(string contenido)
+        {
+            return listaSNT.Contains(contenido);
+        }
+        private void agregarSNT(string contenido)
+        {
+            /*Requerimiento 5:*/
+            listaSNT.Add(contenido);
+        }
+        private void lecturaSNT()
+        {
+            string[] lineas = System.IO.File.ReadAllLines("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\c2.gram");
+        }
         private void Programa(string produccionPrincipal)
         {
+            /*
+            agregarSNT("Programa");
+            agregarSNT("Librerias");
+            agregarSNT("Variables");
+            agregarSNT("ListaIdentificadores");
+            */
             programa.WriteLine(TabControl("using System;"));
             programa.WriteLine(TabControl("namespace Generico"));
             programa.WriteLine(TabControl("{"));
@@ -70,7 +94,7 @@ namespace Generador
         {
             match("Gramatica");
             match(":");
-            match(Tipos.SNT);
+            match(Tipos.ST);
             match(Tipos.FinProduccion);
         }
         private void cabeceraLenguaje()
@@ -108,7 +132,7 @@ namespace Generador
                 lenguaje.WriteLine(TabControl("private void " + getContenido() + "()"));
             }
             lenguaje.WriteLine(TabControl("{"));
-            match(Tipos.SNT);
+            match(Tipos.ST);
             match(Tipos.Produce);
             simbolos();
             match(Tipos.FinProduccion);
@@ -123,17 +147,17 @@ namespace Generador
             if (esTipo(getContenido()))
             {
                 lenguaje.WriteLine(TabControl("match(Tipos." + getContenido() + ");"));
-                match(Tipos.SNT);
+                match(Tipos.ST);
+            }
+            else if (esSNT(getContenido()))
+            {
+                lenguaje.WriteLine(TabControl("" + getContenido() + "();"));
+                match(Tipos.ST);
             }
             else if (getClasificacion() == Tipos.ST)
             {
                 lenguaje.WriteLine(TabControl("match(\"" + getContenido() + "\");"));
                 match(Tipos.ST);
-            }
-            else if (getClasificacion() == Tipos.SNT)
-            {
-                lenguaje.WriteLine(TabControl("" + getContenido() + "();"));
-                match(Tipos.SNT);
             }
             if (getClasificacion() != Tipos.FinProduccion)
             {
