@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 //Requerimiento 1 OK: Construir un metodo para escribir en el archivo Lenguaje.cs intentando el codigo
 //                 "{" incrementa un tabulador, "}" decrementa un tabulador
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 //Requerimiento 3 OK: La primera produccion es publica y el resto privadas
 //Requerimiento 4 OK: El constructor lexico parametrizado debe validar que la extension del archivo a compilar sea .gen, y si no 
 //                 es asi debe lanzar una excepcion
-//Requerimiento 5: Resolver la ambiguedad de ST y SNT
+//Requerimiento 5 OK: Resolver la ambiguedad de ST y SNT
 //                 recorrer linea por linea el archivo .gram para extraer del nombre de cada produccion
 //Requerimiento 6: Agregar el parentesis izquierdo y parentesis derecho escapados en la matriz de transiciones
 //Requerimiento 7: Implementar el OR y la cerradura epsilon (||, &&)
@@ -45,20 +46,18 @@ namespace Generador
         private void agregarSNT(string contenido)
         {
             /*Requerimiento 5:*/
-            listaSNT.Add(contenido);
-        }
-        private void lecturaSNT()
-        {
             string[] lineas = System.IO.File.ReadAllLines("C:\\Users\\wachi\\OneDrive\\Escritorio\\AUTOMATAS\\Generador\\c2.gram");
+            foreach (string linea in lineas)
+            {
+                String line = linea.Replace("    ", "");
+                var result = Regex.Match(line, @"^([\w\-]+)");
+                //Console.WriteLine(result.Value);
+                listaSNT.Add(result.Value);
+            }
         }
         private void Programa(string produccionPrincipal)
         {
-            /*
-            agregarSNT("Programa");
-            agregarSNT("Librerias");
-            agregarSNT("Variables");
-            agregarSNT("ListaIdentificadores");
-            */
+            agregarSNT(getContenido());
             programa.WriteLine(TabControl("using System;"));
             programa.WriteLine(TabControl("namespace Generico"));
             programa.WriteLine(TabControl("{"));
