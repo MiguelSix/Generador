@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 //Requerimiento 5 OK: Resolver la ambiguedad de ST y SNT
 //                 recorrer linea por linea el archivo .gram para extraer del nombre de cada produccion
 //Requerimiento 6: Agregar el parentesis izquierdo y parentesis derecho escapados en la matriz de transiciones
-//Requerimiento 7: Implementar el OR y la cerradura epsilon (||, &&)
+//Requerimiento 7: Implementar la cerradura epsilon
 namespace Generador
 {
     public class Lenguaje : Sintaxis, IDisposable
@@ -143,7 +143,16 @@ namespace Generador
         }
         private void simbolos()
         {
-            if (esTipo(getContenido()))
+            if(getContenido() == "(")
+            {
+                match("(");
+                lenguaje.WriteLine(TabControl("if ()"));
+                lenguaje.WriteLine(TabControl("{"));
+                simbolos();
+                match(")");
+                lenguaje.WriteLine(TabControl("}"));
+            }
+            else if (esTipo(getContenido()))
             {
                 lenguaje.WriteLine(TabControl("match(Tipos." + getContenido() + ");"));
                 match(Tipos.ST);
@@ -158,7 +167,7 @@ namespace Generador
                 lenguaje.WriteLine(TabControl("match(\"" + getContenido() + "\");"));
                 match(Tipos.ST);
             }
-            if (getClasificacion() != Tipos.FinProduccion)
+            if (getClasificacion() != Tipos.FinProduccion  && getContenido() != ")")
             {
                 simbolos();
             }

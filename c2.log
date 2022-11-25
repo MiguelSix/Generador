@@ -1,5 +1,5 @@
 Archivo: C:\Users\wachi\OneDrive\Escritorio\AUTOMATAS\Generador\c2.gram
-Fecha: 23/11/2022 22:16:24
+Fecha: 25/11/2022 9:34:54
 Gramatica ST
 : ST
 cplusplus ST
@@ -30,14 +30,9 @@ Variables ST
 ( ST
 Identificador ST
 ) ST
-? ST
 
  FinProduccion
 ListaIdentificadores ST
 -> Produce
-( ST
-Caracter ST
-| ST
 Numero ST
-) ST
 Fin de compilacion
