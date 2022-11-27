@@ -13,8 +13,8 @@ using System.Text.RegularExpressions;
 //                 es asi debe lanzar una excepcion
 //Requerimiento 5 OK: Resolver la ambiguedad de ST y SNT
 //                 recorrer linea por linea el archivo .gram para extraer del nombre de cada produccion
-//Requerimiento 6: Agregar el parentesis izquierdo y parentesis derecho escapados en la matriz de transiciones
-//Requerimiento 7: Implementar la cerradura epsilon
+//Requerimiento 6 OK: Agregar el parentesis izquierdo y parentesis derecho escapados en la matriz de transiciones
+//Requerimiento 7 OK: Implementar la cerradura epsilon
 namespace Generador
 {
     public class Lenguaje : Sintaxis, IDisposable
@@ -143,13 +143,21 @@ namespace Generador
         }
         private void simbolos()
         {
-            if(getContenido() == "(")
+            //Console.WriteLine("Simbolo: " + getContenido());
+            if(getContenido() == "\\(")
             {
-                match("(");
-                lenguaje.WriteLine(TabControl("if ()"));
+                match("\\(");
+                if(esTipo(getContenido()))
+                {
+                    lenguaje.WriteLine(TabControl("if (getClasificacion() == Tipos." + getContenido() + ")"));
+                }
+                else
+                {
+                    lenguaje.WriteLine(TabControl("if (getContenido() == \"" + getContenido() + "\")"));
+                }
                 lenguaje.WriteLine(TabControl("{"));
                 simbolos();
-                match(")");
+                match("\\)");
                 lenguaje.WriteLine(TabControl("}"));
             }
             else if (esTipo(getContenido()))
@@ -167,7 +175,7 @@ namespace Generador
                 lenguaje.WriteLine(TabControl("match(\"" + getContenido() + "\");"));
                 match(Tipos.ST);
             }
-            if (getClasificacion() != Tipos.FinProduccion  && getContenido() != ")")
+            if (getClasificacion() != Tipos.FinProduccion  && getContenido() != "\\)")
             {
                 simbolos();
             }
